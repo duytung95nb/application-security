@@ -1,0 +1,14 @@
+{
+  "name": "application-security",
+  "version": "1.0.0",
+  "description": "Demo for web application common vulnerabilities",
+  "author": "duytung95nb@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn workspaces foreach -Ap run start"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "packageManager": "yarn@4.4.1"
+}
