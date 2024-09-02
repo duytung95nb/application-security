@@ -6,5 +6,47 @@
   <body>
     <h1>CORS demo</h1>
     <p>CORS demo page</p>
+    <div>
+      <h2>Cookie-based</h2>
+      <br />
+      <button id="auth-with-cookie" onclick="authenticateWithCookie()">
+        Authenticate with cookie
+      </button>
+      <br />
+      <button
+        id="make-request-with-cookie-success"
+        onclick="requestWithCookieSuccess()"
+      >
+        Make request cookie-based auth success
+      </button>
+      <br />
+      <button
+        id="make-request-with-cookie-fail"
+        onclick="requestWithCookieFail()"
+      >
+        Make request cookie-based auth fail
+      </button>
+    </div>
+    <div>
+      <h2>Http auth</h2>
+      <br />
+      <button id="auth-with-http" onclick="authenticateWithHttp()">
+        Authenticate with http
+      </button>
+      <br />
+      <button
+        id="make-request-with-http-auth-success"
+        onclick="requestWithHttpAuthSuccess()"
+      >
+        Make request http auth success
+      </button>
+      <br />
+      <button
+        id="make-request-with-http-auth-fail"
+        onclick="requestWithHttpAuthFail()"
+      >
+        Make request http auth fail
+      </button>
+    </div>
   </body>
 </html>
