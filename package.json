@@ -5,7 +5,7 @@
   "author": "duytung95nb@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "yarn workspaces foreach -Ap run start"
+    "start": "yarn workspaces foreach -Api run start"
   },
   "workspaces": [
     "app/*"

@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 app.use(cookieParser());
+
 // Expect to allow all requests without credentials
 app.get("/", cors(), (req, res) => {
   res.send("Hello World!");
@@ -131,6 +132,14 @@ app.post("/data/http-auth/fail", cors(), (req, res) => {
   console.log(
     "CORS request will still reach here but browser will throw net::ERR_FAILED"
   );
+  res.status(200).send({
+    succes: true,
+  });
+});
+
+// Vulnerability endpoint
+app.post("/change-password", corsForCredentialedCookieRequest, (req, res) => {
+  console.log("Change password runs");
   res.status(200).send({
     succes: true,
   });
