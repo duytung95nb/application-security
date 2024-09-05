@@ -23,6 +23,15 @@ const corsForCredentialedCookieRequest = cors({
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
 });
 
+function cookieAuthMiddleware(req, res, next) {
+  if (req.cookies.user === "admin") {
+    return next();
+  }
+  res.status(401).send({
+    message: "You are not authenticated!",
+  });
+}
+
 // Authenticate with cookie
 app.post(
   "/authenticate/cookie",
@@ -45,16 +54,11 @@ app.post(
 app.post(
   "/data/cookie-based/success",
   corsForCredentialedCookieRequest,
+  cookieAuthMiddleware,
   (req, res) => {
-    if (req.cookies.user === "admin") {
-      res.status(200).send({
-        resourceDataReturned: true,
-      });
-    } else {
-      res.status(401).send({
-        message: "You are not authenticated!",
-      });
-    }
+    res.status(200).send({
+      resourceDataReturned: true,
+    });
   }
 );
 
@@ -99,6 +103,7 @@ app.post(
       });
   }
 );
+
 function httpAuthMiddleware(req, res, next) {
   const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
   // Username and password in form of: <username>:<password>
@@ -138,12 +143,18 @@ app.post("/data/http-auth/fail", cors(), (req, res) => {
 });
 
 // Vulnerability endpoint
-app.post("/change-password", corsForCredentialedCookieRequest, (req, res) => {
-  console.log("Change password runs");
-  res.status(200).send({
-    succes: true,
-  });
-});
+app.post(
+  "/change-password",
+  corsForCredentialedCookieRequest,
+  cookieAuthMiddleware,
+  express.urlencoded(),
+  (req, res) => {
+    console.debug("Change password runs with new password:", req.body.password);
+    res.status(200).send({
+      succes: true,
+    });
+  }
+);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
